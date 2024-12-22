@@ -7,8 +7,8 @@ const productSchema = mongoose.Schema(
     description: { type: String, required: true },
     price: { type: Number, required: true },
     quantity: { type: Number, required: true },
-    images: [{ type: String }], // Store image paths instead of base64
-    thumbnail: { type: String }, // Store thumbnail path
+    images: [{ type: String }],
+    thumbnail: { type: String }, 
   },
   {
     timestamps: true,

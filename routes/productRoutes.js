@@ -8,6 +8,7 @@ const {
   deleteProduct,
 } = require('../controllers/productController');
 const upload = require('../middleware/uploadMiddleware');
+const { protect } = require("../middleware/authMiddleware");
 const asyncHandler = require('../middleware/asyncHandler');
 
 router.route('/')
@@ -18,5 +19,7 @@ router.route('/:id')
   .get(asyncHandler(getProductById))
   .put(upload.array('images', 5), asyncHandler(updateProduct))
   .delete(asyncHandler(deleteProduct));
+
+router.get("/", protect, getProducts);
 
 module.exports = router;
