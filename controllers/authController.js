@@ -2,7 +2,9 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-
+// @desc Add user
+// @route POST /api/auth/register
+// @access Public
 const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -34,6 +36,9 @@ const registerUser = async (req, res) => {
   }
 };
 
+// @desc Login User
+// @route POST /api/auth/login
+// @access Public
 const loginUser = async (req, res) => {
     const { email, password } = req.body;
   

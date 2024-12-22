@@ -33,7 +33,6 @@ const getProductById = async (req, res) => {
 // @desc Create a product with image upload
 // @route POST /api/products
 // @access Public
-
 const createProduct = async (req, res) => {
   try {
     const { sku, name, description, price, quantity } = req.body;

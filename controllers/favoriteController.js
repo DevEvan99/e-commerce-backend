@@ -1,5 +1,8 @@
 const User = require("../models/User");
 
+// @desc Add item to favorites
+// @route POST /api/favorites/add
+// @access Public
 const addToFavorites = async (req, res) => {
   const { userId, productId } = req.body;
 
@@ -10,7 +13,6 @@ const addToFavorites = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Add product to favorites if not already present
     if (!user.favorites.includes(productId)) {
       user.favorites.push(productId);
       await user.save();
@@ -23,7 +25,9 @@ const addToFavorites = async (req, res) => {
   }
 };
 
-
+// @desc Delete a item to favorites
+// @route GET /api/favorites/remove/:id
+// @access Public
 const removeFromFavorites = async (req, res) => {
     const { userId, productId } = req.body;
   
@@ -34,7 +38,6 @@ const removeFromFavorites = async (req, res) => {
         return res.status(404).json({ message: "User not found" });
       }
   
-      // Remove the product from favorites
       user.favorites = user.favorites.filter((id) => id.toString() !== productId);
       await user.save();
   
@@ -45,9 +48,12 @@ const removeFromFavorites = async (req, res) => {
     }
   };
 
-  const updateFavorites = async (req, res) => {
+// @desc Update favorites
+// @route PUT /api/products/update/:id
+// @access Public
+const updateFavorites = async (req, res) => {
     try {
-      const userId = req.user.id; // Extracted from the token in the middleware
+      const userId = req.user.id;
       console.log(userId);
       const { productIds } = req.body;
   
@@ -57,7 +63,6 @@ const removeFromFavorites = async (req, res) => {
         return res.status(404).json({ message: "User not found" });
       }
   
-      // Update the user's favorites
       user.favorites = productIds;
       await user.save();
   
@@ -66,7 +71,7 @@ const removeFromFavorites = async (req, res) => {
       console.error(error);
       res.status(500).json({ message: "Server error" });
     }
-  };
+};
 
   module.exports = {
     addToFavorites,
