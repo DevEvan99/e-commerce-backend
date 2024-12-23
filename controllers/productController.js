@@ -74,7 +74,7 @@ const updateProduct = async (req, res) => {
       const product = await Product.findById(req.params.id);
   
       if (product) {
-        const imagePaths = req.files ? req.files.map((file) => file.path) : []; // New uploaded files
+        const imagePaths = req.files ? req.files.map((file) => file.path) : []; 
         console.log("Uploaded Files:", req.files);
 
         product.sku = sku || product.sku;
@@ -82,8 +82,8 @@ const updateProduct = async (req, res) => {
         product.description = description || product.description;
         product.price = price || product.price;
         product.quantity = quantity || product.quantity;
-        product.images = imagePaths.length > 0 ? imagePaths : product.images; // Replace images if new ones are provided
-        product.thumbnail = thumbnail || product.thumbnail; // Update thumbnail
+        product.images = imagePaths.length > 0 ? imagePaths : product.images; 
+        product.thumbnail = thumbnail || product.thumbnail; 
   
         const updatedProduct = await product.save();
         res.json(updatedProduct);
